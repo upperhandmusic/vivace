@@ -1,0 +1,26 @@
+name: vivace
+
+repository: https://github.com/dnunez24/vivace
+
+packages:
+  - packages/**
+
+command:
+  version:
+    branch: main
+    includeCommitId: true
+    linkToCommits: true
+    message: |
+      chore: release new package version
+
+      {new_package_versions}
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  fix:
+    exec: dart fix --apply .
+  release:
+    exec: melos version && melos publish
+  test:
+    exec: dart test .

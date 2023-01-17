@@ -1,0 +1,6 @@
+{
+  "editor.defaultFormatter": "Dart-Code.dart-code",
+  "editor.formatOnSave": true,
+  "dart.debugSdkLibraries": true,
+  "dart.runPubGetOnPubspecChanges": "never"
+}
