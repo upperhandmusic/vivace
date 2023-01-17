@@ -1,6 +1,12 @@
 {
-  "editor.defaultFormatter": "Dart-Code.dart-code",
-  "editor.formatOnSave": true,
-  "dart.debugSdkLibraries": true,
-  "dart.runPubGetOnPubspecChanges": "never"
+  "[dart]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.suggest.insertMode": "replace",
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.formatOnSave": true,
+  },
+  "dart.runPubGetOnPubspecChanges": "never",
 }
