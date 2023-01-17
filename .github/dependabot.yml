@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - directory: /packages
+    package-ecosystem: pub
+    schedule:
+      interval: weekly
+      day: friday
+      time: "17:00"
+      timezone: "America/Los_Angeles"
+    commit-message:
+      include: scope
+      prefix: chore
+    assignees:
+      - dnunez24
+  - directory: /
+    package-ecosystem: github-actions
+    schedule:
+      interval: weekly
+      day: friday
+      time: "17:00"
+      timezone: "America/Los_Angeles"
+    commit-message:
+      include: scope
+      prefix: chore
+    assignees:
+      - dnunez24
