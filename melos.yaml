@@ -20,7 +20,5 @@ scripts:
     exec: dart analyze .
   fix:
     exec: dart fix --apply .
-  release:
-    exec: melos version && melos publish
   test:
     exec: dart test .
