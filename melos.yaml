@@ -16,6 +16,8 @@ command:
       {new_package_versions}
 
 scripts:
+  add:
+    exec: dart pub add
   analyze:
     exec: dart analyze .
   fix:
