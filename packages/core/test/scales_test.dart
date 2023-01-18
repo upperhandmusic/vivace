@@ -4,109 +4,150 @@ import 'package:vivace_core/src/pitch_class.dart';
 
 void main() {
   group('Scale', () {
-    test('major creates a major scale with the given tonic', () {
-      final tonic = PitchClass.cNatural;
-      final scale = Scale.major(tonic);
-      expect(scale.identity, equals(2741));
-      expect(scale.tonic, equals(tonic));
+    group('constructor', () {
+      test('sets the scale tonic pitch class', () {
+        var tonic = PitchClass.cNatural;
+        var identity = int.parse('101010110101', radix: 2);
+        var scale = Scale(tonic: tonic, identity: identity);
+        expect(scale.tonic, equals(tonic));
+      });
+
+      test('sets the scale identity', () {
+        var tonic = PitchClass.cNatural;
+        var identity = int.parse('101010110101', radix: 2);
+        var scale = Scale(tonic: tonic, identity: identity);
+        expect(scale.identity, equals(identity));
+      });
     });
 
-    test('naturalMinor creates a harmonic minor scale with the given tonic',
-        () {
-      final tonic = PitchClass.cNatural;
-      final scale = Scale.naturalMinor(tonic);
-      expect(scale.identity, equals(1453));
-      expect(scale.tonic, equals(tonic));
+    group('major', () {
+      test('creates a major scale with the given tonic', () {
+        final tonic = PitchClass.cNatural;
+        final scale = Scale.major(tonic);
+        expect(scale.identity, equals(2741));
+        expect(scale.tonic, equals(tonic));
+      });
     });
 
-    test('harmonicMinor creates a harmonic minor scale with the given tonic',
-        () {
-      final tonic = PitchClass.cNatural;
-      final scale = Scale.harmonicMinor(tonic);
-      expect(scale.identity, equals(2477));
-      expect(scale.tonic, equals(tonic));
+    group('naturalMinor', () {
+      test('creates a harmonic minor scale with the given tonic', () {
+        final tonic = PitchClass.cNatural;
+        final scale = Scale.naturalMinor(tonic);
+        expect(scale.identity, equals(1453));
+        expect(scale.tonic, equals(tonic));
+      });
     });
 
-    test('melodicMinor creates a melodic minor scale with the given tonic', () {
-      final tonic = PitchClass.cNatural;
-      final scale = Scale.melodicMinor(tonic);
-      expect(scale.identity, equals(2733));
-      expect(scale.tonic, equals(tonic));
+    group('harmonicMinor', () {
+      test('creates a harmonic minor scale with the given tonic', () {
+        final tonic = PitchClass.cNatural;
+        final scale = Scale.harmonicMinor(tonic);
+        expect(scale.identity, equals(2477));
+        expect(scale.tonic, equals(tonic));
+      });
     });
 
-    test('toSet returns a set of pitch classes in the Scale', () {
-      var scale = Scale.major(PitchClass.cNatural);
-      expect(
-          scale.toSet(),
-          equals({
-            PitchClass.cNatural,
-            PitchClass.dNatural,
-            PitchClass.eNatural,
-            PitchClass.fNatural,
-            PitchClass.gNatural,
-            PitchClass.aNatural,
-            PitchClass.bNatural,
-          }));
+    group('melodicMinor', () {
+      test('creates a melodic minor scale with the given tonic', () {
+        final tonic = PitchClass.cNatural;
+        final scale = Scale.melodicMinor(tonic);
+        expect(scale.identity, equals(2733));
+        expect(scale.tonic, equals(tonic));
+      });
     });
 
-    test('toList returns a list of pitch classes in the Scale', () {
-      var scale = Scale.major(PitchClass.cNatural);
-      expect(
-          scale.toList(),
-          equals([
-            PitchClass.cNatural,
-            PitchClass.dNatural,
-            PitchClass.eNatural,
-            PitchClass.fNatural,
-            PitchClass.gNatural,
-            PitchClass.aNatural,
-            PitchClass.bNatural,
-          ]));
+    group('toSet', () {
+      test('returns a set of pitch classes in the Scale', () {
+        var scale = Scale.major(PitchClass.cNatural);
+        expect(
+            scale.toSet(),
+            equals({
+              PitchClass.cNatural,
+              PitchClass.dNatural,
+              PitchClass.eNatural,
+              PitchClass.fNatural,
+              PitchClass.gNatural,
+              PitchClass.aNatural,
+              PitchClass.bNatural,
+            }));
+      });
     });
 
-    test('[n] returns the PitchClass at the nth scale degree', () {
-      var scale = Scale.major(PitchClass.cNatural);
-      expect(scale[1], PitchClass.cNatural);
-      expect(scale[2], PitchClass.dNatural);
-      expect(scale[3], PitchClass.eNatural);
-      expect(scale[4], PitchClass.fNatural);
-      expect(scale[5], PitchClass.gNatural);
-      expect(scale[6], PitchClass.aNatural);
-      expect(scale[7], PitchClass.bNatural);
+    group('toList', () {
+      test('returns a list of pitch classes in the Scale', () {
+        var scale = Scale.major(PitchClass.cNatural);
+        expect(
+            scale.toList(),
+            equals([
+              PitchClass.cNatural,
+              PitchClass.dNatural,
+              PitchClass.eNatural,
+              PitchClass.fNatural,
+              PitchClass.gNatural,
+              PitchClass.aNatural,
+              PitchClass.bNatural,
+            ]));
+      });
     });
-  });
 
-  group('Scale.mode(n)', () {
-    test('creates a new Scale as the nth mode of the Scale', () {
-      var cMajor = Scale.major(PitchClass.cNatural);
-      var ionian = cMajor.mode(1);
-      var dorian = cMajor.mode(2);
-      var phrygian = cMajor.mode(3);
-      var lydian = cMajor.mode(4);
-      var mixolydian = cMajor.mode(5);
-      var aeolian = cMajor.mode(6);
-      var locrian = cMajor.mode(7);
+    group('[]', () {
+      test('returns the PitchClass at the ith scale degree', () {
+        var scale = Scale.major(PitchClass.cNatural);
+        expect(scale[1], PitchClass.cNatural);
+        expect(scale[2], PitchClass.dNatural);
+        expect(scale[3], PitchClass.eNatural);
+        expect(scale[4], PitchClass.fNatural);
+        expect(scale[5], PitchClass.gNatural);
+        expect(scale[6], PitchClass.aNatural);
+        expect(scale[7], PitchClass.bNatural);
+      });
+    });
 
-      expect(ionian.identity, equals(cMajor.identity));
-      expect(ionian.tonic.setNumber, equals(PitchClass.cNatural.setNumber));
+    group('mode', () {
+      test('throws an error when mode number is < 1', () {
+        var scale = Scale.major(PitchClass.cNatural);
+        expect(() => scale.mode(0), throwsA(isA<AssertionError>()));
+        expect(() => scale.mode(-1), throwsA(isA<AssertionError>()));
+      });
 
-      expect(dorian.identity, equals(1709));
-      expect(dorian.tonic.setNumber, equals(PitchClass.dNatural.setNumber));
+      test('throws an error when mode number is > number of possible modes',
+          () {
+        var scale = Scale.major(PitchClass.cNatural);
+        expect(() => scale.mode(8), throwsA(isA<AssertionError>()));
+      });
 
-      expect(phrygian.identity, equals(1451));
-      expect(phrygian.tonic.setNumber, equals(PitchClass.eNatural.setNumber));
+      test('creates a new Scale as the nth mode of the Scale', () {
+        var cMajor = Scale.major(PitchClass.cNatural);
+        var ionian = cMajor.mode(1);
+        var dorian = cMajor.mode(2);
+        var phrygian = cMajor.mode(3);
+        var lydian = cMajor.mode(4);
+        var mixolydian = cMajor.mode(5);
+        var aeolian = cMajor.mode(6);
+        var locrian = cMajor.mode(7);
 
-      expect(lydian.identity, equals(2773));
-      expect(lydian.tonic.setNumber, equals(PitchClass.fNatural.setNumber));
+        expect(ionian.identity, equals(cMajor.identity));
+        expect(ionian.tonic.setNumber, equals(PitchClass.cNatural.setNumber));
 
-      expect(mixolydian.identity, equals(1717));
-      expect(mixolydian.tonic.setNumber, equals(PitchClass.gNatural.setNumber));
+        expect(dorian.identity, equals(1709));
+        expect(dorian.tonic.setNumber, equals(PitchClass.dNatural.setNumber));
 
-      expect(aeolian.identity, equals(1453));
-      expect(aeolian.tonic.setNumber, equals(PitchClass.aNatural.setNumber));
+        expect(phrygian.identity, equals(1451));
+        expect(phrygian.tonic.setNumber, equals(PitchClass.eNatural.setNumber));
 
-      expect(locrian.identity, equals(1387));
-      expect(locrian.tonic.setNumber, equals(PitchClass.bNatural.setNumber));
+        expect(lydian.identity, equals(2773));
+        expect(lydian.tonic.setNumber, equals(PitchClass.fNatural.setNumber));
+
+        expect(mixolydian.identity, equals(1717));
+        expect(
+            mixolydian.tonic.setNumber, equals(PitchClass.gNatural.setNumber));
+
+        expect(aeolian.identity, equals(1453));
+        expect(aeolian.tonic.setNumber, equals(PitchClass.aNatural.setNumber));
+
+        expect(locrian.identity, equals(1387));
+        expect(locrian.tonic.setNumber, equals(PitchClass.bNatural.setNumber));
+      });
     });
   });
 }

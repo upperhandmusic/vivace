@@ -9,7 +9,7 @@ class Scale {
   /// https://ianring.com/musictheory/scales/ for more details.
   final int identity;
 
-  Scale(this.tonic, this.identity);
+  Scale({required this.tonic, required this.identity});
   const Scale.majorPentatonic(this.tonic) : identity = 661;
   const Scale.minorPentatonic(this.tonic) : identity = 1193;
   const Scale.blues(this.tonic) : identity = 1257;
@@ -35,7 +35,7 @@ class Scale {
     var newIdentity = identity.rotateRight(modeScaleDegree);
     var newTonic = PitchClass(modeScaleDegree);
 
-    return Scale(newTonic, newIdentity);
+    return Scale(tonic: newTonic, identity: newIdentity);
   }
 
   Set<PitchClass> toSet() {
