@@ -5,10 +5,7 @@ import 'dart:math';
 extension BinaryHelpers on int {
   /// Check if the [n]th bit of an [int] is set (1).
   bool isBitEnabled(int n) {
-    if (n <= 0) {
-      throw FormatException('n must be greater than 0', n);
-    }
-
+    assert(n > 0, 'n must be greater than 0');
     return (this & createBitMask(n)) > 0;
   }
 
@@ -59,18 +56,3 @@ extension BinaryHelpers on int {
 
 /// Creates a bit mask with the [i]th bit from the right set to 1 (on).
 int createBitMask(int i) => i <= 1 ? 1 : 1 << (i - 1);
-
-Iterable<int> generateScaleDegreeTests(int scale) sync* {
-  const totalScaleDegrees = 12;
-  const binaryBase = 2;
-  var i = 0;
-
-  while (i < totalScaleDegrees) {
-    var scaleDegreeMask = pow(binaryBase, i) as int;
-    var isInScale = (scale & scaleDegreeMask) > 0;
-    yield isInScale as int;
-    i += 1;
-  }
-}
-
-// var scaleDegreeTests = [...generateScaleDegreeTests(2741)];
