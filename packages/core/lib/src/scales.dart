@@ -14,7 +14,7 @@ class Scale {
   const Scale.minorPentatonic(this.tonic) : identity = 1193;
   const Scale.blues(this.tonic) : identity = 1257;
   const Scale.wholetone(this.tonic) : identity = 1365;
-  const Scale.major(this.tonic) : identity = 2047;
+  const Scale.major(this.tonic) : identity = 2741;
   const Scale.harmonicMajor(this.tonic) : identity = 2485;
   const Scale.naturalMinor(this.tonic) : identity = 1453;
   const Scale.harmonicMinor(this.tonic) : identity = 2477;
@@ -25,18 +25,13 @@ class Scale {
   int get modeCount => identity.countEnabledBits();
 
   Scale mode(int modeNumber) {
-    if (modeNumber < 1) {
-      throw FormatException('must not be less than 1', modeNumber);
-    }
-
-    if (modeNumber > modeCount) {
-      throw FormatException(
-          'must not be greater than ${modeCount - 1}', modeNumber);
-    }
+    assert(modeNumber >= 1, 'modeNumber must be greater or equal to 1');
+    assert(modeNumber <= modeCount,
+        'modeNumber must be less than or equal to $modeCount');
 
     if (modeNumber == 1) return this;
 
-    var modeScaleDegree = identity.enabledBits[modeNumber] - 1;
+    var modeScaleDegree = identity.enabledBits[modeNumber - 1];
     var newIdentity = identity.rotateRight(modeScaleDegree);
     var newTonic = PitchClass(modeScaleDegree);
 
@@ -50,7 +45,8 @@ class Scale {
   List<PitchClass> toList() {
     return identity.enabledBits.map(PitchClass.new).toList();
   }
-}
 
-var dMajorScale = Scale(PitchClass.dNatural, 2047);
-var fSharpMajScale = Scale.major(PitchClass.fSharp);
+  PitchClass operator [](int scaleDegree) {
+    return toList().elementAt(scaleDegree - 1);
+  }
+}
