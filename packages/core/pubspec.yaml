@@ -1,5 +1,5 @@
 name: vivace_core
-description: A starting point for Dart libraries or applications.
+description: A library for writing music applications.
 version: 0.1.0
 homepage: https://github.com/dnunez24/vivace
 repository: https://github.com/dnunez24/vivace.git
@@ -7,9 +7,6 @@ issue_tracker: https://github.com/dnunez24/vivace/issues
 
 environment:
   sdk: '>=2.18.7 <3.0.0'
-
-# dependencies:
-#   path: ^1.8.0
 
 dev_dependencies:
   lints: ^2.0.1
