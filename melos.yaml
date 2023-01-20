@@ -10,10 +10,7 @@ command:
     branch: main
     includeCommitId: true
     linkToCommits: true
-    message: |
-      chore: release new package version
-
-      {new_package_versions}
+    message: "chore: release version {new_package_versions}"
 
 scripts:
   add:
