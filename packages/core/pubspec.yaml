@@ -1,9 +1,9 @@
 name: vivace_core
 description: A library for writing music applications.
 version: 0.1.0
-homepage: https://github.com/dnunez24/vivace
-repository: https://github.com/dnunez24/vivace.git
-issue_tracker: https://github.com/dnunez24/vivace/issues
+homepage: https://github.com/upperhandmusic/vivace
+repository: https://github.com/upperhandmusic/vivace.git
+issue_tracker: https://github.com/upperhandmusic/vivace/issues
 
 environment:
   sdk: '>=2.18.7 <3.0.0'
