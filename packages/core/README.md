@@ -2,6 +2,8 @@
 
 A library for writing music applications.
 
+**THIS PACKAGE IS STILL IN VERY EARLY DEVELOPMENT AND SUBJECT TO CHANGE UNTIL FIRST STABLE RELEASE**
+
 ## Features
 
 - Create and manipulate pitches, intervals and scales
@@ -9,14 +11,15 @@ A library for writing music applications.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```
+dart pub get vivace_core
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+### Scales
 
 ```dart
-const like = 'sample';
+const cMajor = Scale.major(PitchClass.cNatural);
+print(cMajor.tonic); // PitchClass(0)
 ```
