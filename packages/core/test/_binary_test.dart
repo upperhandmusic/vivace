@@ -2,7 +2,7 @@ import 'package:vivace_core/src/_binary.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('BinaryHelpers extension on int', () {
+  group('BinaryHelpers extension', () {
     group('isBitEnabled', () {
       var num = int.parse('1001', radix: 2);
 
@@ -26,7 +26,7 @@ void main() {
       });
     });
 
-    group('isFirstBitEnabled()', () {
+    group('isFirstBitEnabled', () {
       test('is true when first bit from right is enabled (1)', () {
         expect((-1).isFirstBitEnabled(), true);
         expect(1.isFirstBitEnabled(), true);
@@ -52,7 +52,7 @@ void main() {
       });
     });
 
-    group('countEnabledBits()', () {
+    group('countEnabledBits', () {
       test('is 0 when number is <= 0', () {
         expect((-1).countEnabledBits(), 0);
         expect(0.countEnabledBits(), 0);
