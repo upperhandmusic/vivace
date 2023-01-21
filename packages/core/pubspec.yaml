@@ -8,6 +8,9 @@ issue_tracker: https://github.com/upperhandmusic/vivace/issues
 environment:
   sdk: '>=2.18.7 <3.0.0'
 
+dependencies:
+  collection: ^1.17.0
+
 dev_dependencies:
   lints: ^2.0.1
   test: ^1.22.2
