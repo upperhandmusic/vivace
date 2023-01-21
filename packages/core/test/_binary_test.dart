@@ -1,6 +1,8 @@
 import 'package:vivace_core/src/_binary.dart';
 import 'package:test/test.dart';
 
+import 'matchers.dart';
+
 void main() {
   group('BinaryHelpers extension', () {
     group('isBitEnabled', () {
@@ -21,8 +23,8 @@ void main() {
       });
 
       test('throws an assertion error when n is <= 0', () {
-        expect(() => num.isBitEnabled(0), throwsA(isA<AssertionError>()));
-        expect(() => num.isBitEnabled(-1), throwsA(isA<AssertionError>()));
+        expect(() => num.isBitEnabled(0), throwsAssertionError);
+        expect(() => num.isBitEnabled(-1), throwsAssertionError);
       });
     });
 

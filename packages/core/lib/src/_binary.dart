@@ -52,6 +52,12 @@ extension BinaryHelpers on int {
 
     return count;
   }
+
+  /// Creates a bit mask with the bit at the index of this <int> from the right
+  /// set to 1 (on).
+  int asBitMask() {
+    return this <= 1 ? 1 : 1 << this;
+  }
 }
 
 /// Creates a bit mask with the [i]th bit from the right set to 1 (on).
