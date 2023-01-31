@@ -3,8 +3,6 @@ import 'package:test/test.dart';
 import 'package:vivace_core/src/pitch_class_set.dart';
 import 'package:vivace_core/vivace_core.dart';
 
-import 'matchers.dart';
-
 void main() {
   group('PitchClassSet', () {
     test('is not modifiable once created', () {
