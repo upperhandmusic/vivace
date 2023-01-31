@@ -43,17 +43,17 @@ class Scale {
 
     var modeScaleDegree = id.enabledBits[modeNumber - 1];
     var newIdentity = id.rotateRight(modeScaleDegree);
-    var newTonic = PitchClass(modeScaleDegree);
+    var newTonic = PitchClass.from(modeScaleDegree);
 
     return Scale(tonic: newTonic, id: newIdentity);
   }
 
   Set<PitchClass> toSet() {
-    return id.enabledBits.map(PitchClass.new).toSet();
+    return id.enabledBits.map(PitchClass.from).toSet();
   }
 
   List<PitchClass> toList() {
-    return id.enabledBits.map(PitchClass.new).toList();
+    return id.enabledBits.map(PitchClass.from).toList();
   }
 
   PitchClass operator [](int scaleDegree) {

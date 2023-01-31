@@ -8,37 +8,36 @@ import 'matchers.dart';
 void main() {
   group('PitchClassSet', () {
     test('is not modifiable once created', () {
-      var pcs = PitchClassSet([2, 7, 0, 3]);
+      var pcs = PitchClassSet.from([2, 7, 0, 3]);
       expect(pcs, isA<UnmodifiableSetView>());
     });
 
-    group('constructor', () {
+    group('from', () {
+      test('creates a set of pitch classes from an iterable of integers', () {
+        var pcsList = PitchClassSet.from([0, 1, 2]);
+        expect(pcsList, equals({PitchClass.C, PitchClass.Db, PitchClass.D}));
+
+        var pcsSet = PitchClassSet.from({0, 1, 2});
+        expect(pcsSet, equals({PitchClass.C, PitchClass.Db, PitchClass.D}));
+      });
+
       test('creates a sorted set of pitch classes', () {
-        var pcs = PitchClassSet([2, 7, 0, 3]);
-        expect(
-            pcs,
-            equals(
-                {PitchClass(0), PitchClass(2), PitchClass(3), PitchClass(7)}));
+        var pcs = PitchClassSet.from([2, 7, 0, 3]);
+        expect(pcs,
+            equals({PitchClass.C, PitchClass.D, PitchClass.Eb, PitchClass.G}));
       });
 
       test('only contains unique pitch classes', () {
-        var pcs = PitchClassSet([7, 3, 2, 0, 3]);
-        expect(
-            pcs,
-            equals(
-                {PitchClass(0), PitchClass(2), PitchClass(3), PitchClass(7)}));
+        var pcs = PitchClassSet.from([7, 3, 2, 0, 3]);
+        expect(pcs,
+            equals({PitchClass.C, PitchClass.D, PitchClass.Eb, PitchClass.G}));
       });
 
       test('throws an error if numbers are outside valid pitch class range',
           () {
-        expect(() => PitchClassSet([-1, 3, 8]), throwsAssertionError);
-        expect(() => PitchClassSet([3, 8, 12]), throwsAssertionError);
+        expect(() => PitchClassSet.from([-1, 3, 8]), throwsRangeError);
+        expect(() => PitchClassSet.from([3, 8, 12]), throwsRangeError);
       });
-    });
-
-    group('add', () {
-      //
-      test('throws an error', () {});
     });
   });
 }
