@@ -93,39 +93,69 @@ void main() {
     });
   });
 
-  // group('duple', () {
-  //   test('creates a 2/4 meter by default', () {
-  //     final meter = Meter.simpleDuple();
-  //     expect(meter.beatsPerCycle, 2);
-  //     expect(meter.noteValue, NoteValue.quarter);
-  //   });
+  group('Meter.simpleDuple()', () {
+    test('creates a 2/4 meter by default', () {
+      final meter = Meter.simpleDuple();
 
-  //   test('allows setting the note value per beat', () {
-  //     final meter = Meter.simpleDuple(NoteValue.half);
-  //     expect(meter.beatsPerCycle, 2);
-  //     expect(meter.noteValue, NoteValue.half);
-  //   });
-  // });
+      expect(meter.beatsPerCycle, 2);
+      expect(meter.divisionsPerCycle, 4);
+      expect(meter.noteValue, NoteValue.quarter);
+      expect(meter.id, equals('1010'.toBinary()));
+    });
 
-  // group('triple', () {
-  //   test('creates a 3/4 meter be default', () {
-  //     final meter = Meter.simpleTriple();
-  //     expect(meter.beatsPerCycle, 3);
-  //     expect(meter.noteValue, NoteValue.quarter);
-  //   });
+    test('allows setting the note value per beat', () {
+      final meter = Meter.simpleDuple(NoteValue.half);
 
-  //   test('allows setting the note value per beat', () {
-  //     final meter = Meter.simpleTriple(NoteValue.half);
-  //     expect(meter.beatsPerCycle, 3);
-  //     expect(meter.noteValue, NoteValue.half);
-  //   });
-  // });
+      expect(meter.beatsPerCycle, 2);
+      expect(meter.divisionsPerCycle, 4);
+      expect(meter.noteValue, NoteValue.half);
+      expect(meter.id, equals('1010'.toBinary()));
+    });
+  });
+
+  group('Meter.simpleTriple()', () {
+    test('creates a 3/4 meter by default', () {
+      final meter = Meter.simpleTriple();
+
+      expect(meter.beatsPerCycle, 3);
+      expect(meter.divisionsPerCycle, 6);
+      expect(meter.noteValue, NoteValue.quarter);
+      expect(meter.id, equals('101010'.toBinary()));
+    });
+
+    test('allows setting the note value per beat', () {
+      final meter = Meter.simpleTriple(NoteValue.eighth);
+
+      expect(meter.beatsPerCycle, 3);
+      expect(meter.divisionsPerCycle, 6);
+      expect(meter.noteValue, NoteValue.eighth);
+      expect(meter.id, equals('101010'.toBinary()));
+    });
+  });
+
+  group('Meter.simpleQuadruple()', () {
+    test('creates a 4/4 meter by default', () {
+      final meter = Meter.simpleQuadruple();
+
+      expect(meter.beatsPerCycle, 4);
+      expect(meter.divisionsPerCycle, 8);
+      expect(meter.noteValue, NoteValue.quarter);
+      expect(meter.id, equals('10101010'.toBinary()));
+    });
+
+    test('allows setting the note value per beat', () {
+      final meter = Meter.simpleQuadruple(NoteValue.half);
+
+      expect(meter.beatsPerCycle, 4);
+      expect(meter.divisionsPerCycle, 8);
+      expect(meter.noteValue, NoteValue.half);
+      expect(meter.id, equals('10101010'.toBinary()));
+    });
+  });
 
   group('Meter.classification', () {
     test('returns simple if each beat divides equally into two parts', () {
-      // 1/4 2/4 3/4 4/4 5/4
-      // [1, 2, 3, 4, 5]
-      // final meter = Meter(1);
+      //
     });
   });
 
