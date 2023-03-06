@@ -1,4 +1,4 @@
-import 'package:vivace_core/src/_binary.dart';
+import 'package:vivace_core/src/helpers/_binary.dart';
 import 'package:test/test.dart';
 
 import 'matchers.dart';
@@ -51,6 +51,21 @@ void main() {
         expect(int.parse('11111', radix: 2).enabledBits, [0, 1, 2, 3, 4]);
         expect(int.parse('101010110101', radix: 2).enabledBits,
             [0, 2, 4, 5, 7, 9, 11]);
+      });
+    });
+
+    group('countBits', () {
+      test('is 0 when number is <= 0', () {
+        expect((-1).countBits(), 0);
+        expect(0.countBits(), 0);
+      });
+
+      test("is count of total bits (1's and 0's) when number is > 0", () {
+        expect(1.countBits(), 1);
+        expect(2.countBits(), 2);
+        expect(3.countBits(), 2);
+        expect(5.countBits(), 3);
+        expect(7.countBits(), 3);
       });
     });
 
@@ -110,6 +125,26 @@ void main() {
       test('defaults to a bit width of 12 for the rotation', () {
         var n = int.parse('100110000010', radix: 2);
         expect(n.rotateRight(4), equals(int.parse('001010011000', radix: 2)));
+      });
+    });
+  });
+
+  group('BinaryListExtensions', () {
+    group('toBinary', () {
+      test("converts a list of 0's and 1's into a binary integer", () {
+        expect([0].toBinary(), equals(0));
+        expect([1].toBinary(), equals(1));
+        expect([1, 0, 0].toBinary(), equals(4));
+        expect([1, 0, 1, 0].toBinary(), equals(10));
+        expect([1, 1, 1, 1].toBinary(), equals(15));
+      });
+    });
+  });
+
+  group('BinaryStringExtensions', () {
+    group('toBinary', () {
+      test("converts a string of 0's and 1's into a binary integer", () {
+        //
       });
     });
   });
