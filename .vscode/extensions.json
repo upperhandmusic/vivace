@@ -1,6 +1,7 @@
 {
   "recommendations": [
-    "Dart-Code.dart-code",
-    "blaugold.melos-code"
+    "blaugold.melos-code",
+    "ms-vscode-remote.remote-containers",
+    "ms-azuretools.vscode-docker"
   ]
 }

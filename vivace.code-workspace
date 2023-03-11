@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"yaml.schemas": {
+			"https://json.schemastore.org/github-workflow.json": "file:///Users/dnunez/Projects/vivace/.github/workflows/deploy.yaml"
+		}
+	}
+}

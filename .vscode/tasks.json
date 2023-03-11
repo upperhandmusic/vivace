@@ -7,6 +7,16 @@
       "label": "melos: test",
       "group": {
         "kind": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "dart: dart test",
+      "type": "dart",
+      "command": "dart",
+      "args": ["test", "-r", "expanded", "${file}"],
+      "group": {
+        "kind": "test",
         "isDefault": true
       }
     }
