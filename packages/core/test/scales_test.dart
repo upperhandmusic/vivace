@@ -73,16 +73,17 @@ void main() {
       test('returns a set of pitch classes in the Scale', () {
         const scale = Scale.major(PitchClass.C);
         expect(
-            scale.toSet(),
-            equals({
-              PitchClass.C,
-              PitchClass.D,
-              PitchClass.E,
-              PitchClass.F,
-              PitchClass.G,
-              PitchClass.A,
-              PitchClass.B,
-            }));
+          scale.toSet(),
+          equals({
+            PitchClass.C,
+            PitchClass.D,
+            PitchClass.E,
+            PitchClass.F,
+            PitchClass.G,
+            PitchClass.A,
+            PitchClass.B,
+          }),
+        );
       });
     });
 
@@ -90,16 +91,17 @@ void main() {
       test('returns a list of pitch classes in the Scale', () {
         const scale = Scale.major(PitchClass.C);
         expect(
-            scale.toList(),
-            equals([
-              PitchClass.C,
-              PitchClass.D,
-              PitchClass.E,
-              PitchClass.F,
-              PitchClass.G,
-              PitchClass.A,
-              PitchClass.B,
-            ]));
+          scale.toList(),
+          equals([
+            PitchClass.C,
+            PitchClass.D,
+            PitchClass.E,
+            PitchClass.F,
+            PitchClass.G,
+            PitchClass.A,
+            PitchClass.B,
+          ]),
+        );
       });
     });
 

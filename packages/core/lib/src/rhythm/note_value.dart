@@ -10,13 +10,24 @@ enum NoteValue {
   oneHundredTwentyEighth(1 / 128),
   twoHundredFiftySixth(1 / 256);
 
-  /// The relative duration of the note as compared to a whole note whose
-  /// duration is a full [Measure].
-  final double duration;
-
   const NoteValue(this.duration);
 
-  // factory NoteValue.from(double n) => NoteValue.values.elementAt(NoteValue.values.indexOf(n));
+  // NoteValue.from(1/16)
+  // NoteValue.from(16)
+  factory NoteValue.from(num identifier) => NoteValue.values.firstWhere(
+        (noteValue) =>
+            noteValue.duration ==
+            (identifier < 0 ? identifier : 1 / identifier),
+      );
+
+  /// The relative duration of the note as compared to a whole note whose
+  /// duration is a full measure.
+  final double duration;
+
+  // NoteValue.parse("16th")
+  // NoteValue.parse("16")
+  // factory NoteValue.parse(int value) =>
+  //     NoteValue.values.firstWhere((element) => element.duration == 1 / value);
 
   double get halved => duration / 2;
   // NoteValue get halved => next;
@@ -40,7 +51,5 @@ enum NoteValue {
   NoteValue get division => values.elementAt((index + 1) % values.length);
 
   @override
-  String toString() {
-    return '${1 ~/ duration}';
-  }
+  String toString() => '${1 ~/ duration}';
 }

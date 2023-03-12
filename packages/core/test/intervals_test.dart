@@ -1,3 +1,7 @@
 import 'package:test/test.dart';
 
-void main() {}
+void main() {
+  group('Interval', () {
+    test('creates an interval', () {}, skip: true);
+  });
+}

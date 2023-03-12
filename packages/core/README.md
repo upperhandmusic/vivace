@@ -2,6 +2,8 @@
 
 A library for writing music applications.
 
+The core library focuses on foundational music concepts such as pitch, scales, intervals, rhythm and more.
+
 **THIS PACKAGE IS STILL IN VERY EARLY DEVELOPMENT AND SUBJECT TO CHANGE UNTIL FIRST STABLE RELEASE**
 
 ## Features

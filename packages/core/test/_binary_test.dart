@@ -1,12 +1,12 @@
-import 'package:vivace_core/src/helpers/_binary.dart';
 import 'package:test/test.dart';
+import 'package:vivace_core/src/helpers/_binary.dart';
 
 import 'matchers.dart';
 
 void main() {
   group('BinaryHelpers extension', () {
     group('isBitEnabled', () {
-      var num = int.parse('1001', radix: 2);
+      final num = int.parse('1001', radix: 2);
 
       test('is true when nth bit from right is enabled (1)', () {
         expect((-1).isBitEnabled(1), true);
@@ -45,12 +45,14 @@ void main() {
 
     group('enabledBits', () {
       test("returns a list of indices for the enabled bits (1's)", () {
-        expect(0.enabledBits, []);
+        expect(0.enabledBits, <int>[]);
         expect(1.enabledBits, [0]);
         expect(int.parse('11010', radix: 2).enabledBits, [1, 3, 4]);
         expect(int.parse('11111', radix: 2).enabledBits, [0, 1, 2, 3, 4]);
-        expect(int.parse('101010110101', radix: 2).enabledBits,
-            [0, 2, 4, 5, 7, 9, 11]);
+        expect(
+          int.parse('101010110101', radix: 2).enabledBits,
+          [0, 2, 4, 5, 7, 9, 11],
+        );
       });
     });
 
@@ -86,44 +88,60 @@ void main() {
 
     group('rotateLeft', () {
       test(
-          'rotates the binary digits to the left by the specified number of places',
-          () {
-        var n = int.parse('1001', radix: 2);
+          'rotates the binary digits to the left by the specified '
+          'number of places', () {
+        final n = int.parse('1001', radix: 2);
         expect(n.rotateLeft(0, bitWidth: 4), equals(n));
         expect(
-            n.rotateLeft(1, bitWidth: 4), equals(int.parse('0011', radix: 2)));
+          n.rotateLeft(1, bitWidth: 4),
+          equals(int.parse('0011', radix: 2)),
+        );
         expect(
-            n.rotateLeft(2, bitWidth: 4), equals(int.parse('0110', radix: 2)));
+          n.rotateLeft(2, bitWidth: 4),
+          equals(int.parse('0110', radix: 2)),
+        );
         expect(
-            n.rotateLeft(3, bitWidth: 4), equals(int.parse('1100', radix: 2)));
+          n.rotateLeft(3, bitWidth: 4),
+          equals(int.parse('1100', radix: 2)),
+        );
         expect(
-            n.rotateLeft(4, bitWidth: 4), equals(int.parse('1001', radix: 2)));
+          n.rotateLeft(4, bitWidth: 4),
+          equals(int.parse('1001', radix: 2)),
+        );
       });
 
       test('defaults to a bit width of 12 for the rotation', () {
-        var n = int.parse('100110000010', radix: 2);
+        final n = int.parse('100110000010', radix: 2);
         expect(n.rotateLeft(4), equals(int.parse('100000101001', radix: 2)));
       });
     });
 
     group('rotateRight', () {
       test(
-          'rotates the binary digits to the right by the specified number of places',
-          () {
-        var n = int.parse('1001', radix: 2);
+          'rotates the binary digits to the right by the specified '
+          'number of places', () {
+        final n = int.parse('1001', radix: 2);
         expect(n.rotateRight(0, bitWidth: 4), equals(n));
         expect(
-            n.rotateRight(1, bitWidth: 4), equals(int.parse('1100', radix: 2)));
+          n.rotateRight(1, bitWidth: 4),
+          equals(int.parse('1100', radix: 2)),
+        );
         expect(
-            n.rotateRight(2, bitWidth: 4), equals(int.parse('0110', radix: 2)));
+          n.rotateRight(2, bitWidth: 4),
+          equals(int.parse('0110', radix: 2)),
+        );
         expect(
-            n.rotateRight(3, bitWidth: 4), equals(int.parse('0011', radix: 2)));
+          n.rotateRight(3, bitWidth: 4),
+          equals(int.parse('0011', radix: 2)),
+        );
         expect(
-            n.rotateRight(4, bitWidth: 4), equals(int.parse('1001', radix: 2)));
+          n.rotateRight(4, bitWidth: 4),
+          equals(int.parse('1001', radix: 2)),
+        );
       });
 
       test('defaults to a bit width of 12 for the rotation', () {
-        var n = int.parse('100110000010', radix: 2);
+        final n = int.parse('100110000010', radix: 2);
         expect(n.rotateRight(4), equals(int.parse('001010011000', radix: 2)));
       });
     });

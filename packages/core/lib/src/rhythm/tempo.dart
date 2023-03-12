@@ -1,11 +1,11 @@
 import './note_value.dart';
 
 class Tempo {
+  const Tempo(this.beatsPerMinute, [this.noteValue = NoteValue.quarter]);
+
   final double beatsPerMinute;
 
   final NoteValue noteValue;
-
-  const Tempo(this.beatsPerMinute, [this.noteValue = NoteValue.quarter]);
 
   /// Get a new [Tempo] at half the beats per minute of.
   Tempo get halved => this / 2;
