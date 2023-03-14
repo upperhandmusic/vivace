@@ -58,6 +58,10 @@ enum PitchClass implements Comparable<PitchClass> {
     return PitchClass.from(noteName, accidental);
   }
 
+  static const lowest = 0;
+
+  static const highest = 11;
+
   int get setNumber => index;
 
   bool operator <(PitchClass other) => setNumber < other.setNumber;
