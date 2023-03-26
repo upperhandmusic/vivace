@@ -3,8 +3,10 @@
 
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update VARIANT to pick a Dart version
-		"args": { "VARIANT": "2.19" }
+		"args": {
+			// Update VARIANT to pick a Dart version
+			"VARIANT": "2.19"
+		}
 	},
 
 	"runArgs": ["--env-file", ".env"],
