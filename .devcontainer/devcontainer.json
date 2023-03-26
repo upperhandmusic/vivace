@@ -26,7 +26,11 @@
 				"dart-code.dart-code",
 				"vscodevim.vim",
 				"blaugold.melos-code",
-				"VisualStudioExptTeam.vscodeintellicode"
+				"VisualStudioExptTeam.vscodeintellicode",
+				"GitHub.copilot",
+				"Dart-Code.flutter",
+				"yatki.vscode-surround",
+				"redhat.vscode-yaml"
 			]
 		}
 	},
