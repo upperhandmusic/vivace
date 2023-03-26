@@ -10,6 +10,6 @@
   },
   "dart.runPubGetOnPubspecChanges": "never",
   "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow.json": "file:///Users/dnunez/Projects/vivace/.github/workflows/deploy.yaml"
-  },
+    "https://json.schemastore.org/github-workflow.json": "${workspace}/.github/workflows/deploy.yaml"
+  }
 }
