@@ -25,3 +25,10 @@ doc/api/
 # Avoid committing test coverage and doc files
 doc
 coverage
+
+# Don't commit developer-specific environment variables
+.env
+
+# Don't include the IntelliJ project files
+.idea
+*.iml
