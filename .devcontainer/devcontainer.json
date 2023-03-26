@@ -1,9 +1,18 @@
 {
 	"name": "Dart (Community)",
+
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update VARIANT to pick a Dart version
 		"args": { "VARIANT": "2.19" }
+	},
+
+	"runArgs": ["--env-file", ".env"],
+
+	"containerEnv": {
+		// Use the same shell as the one in the host OS so developers can work in a
+		// familiar shell inside the dev container. Defaults to bash.
+		"SHELL": "${localEnv:SHELL:/bin/bash}"
 	},
 
 	// Configure tool-specific properties.
@@ -14,7 +23,8 @@
 			"extensions": [
 				"dart-code.dart-code",
 				"vscodevim.vim",
-				"blaugold.melos-code"
+				"blaugold.melos-code",
+				"VisualStudioExptTeam.vscodeintellicode"
 			]
 		}
 	},
