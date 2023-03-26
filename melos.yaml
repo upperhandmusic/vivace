@@ -1,6 +1,6 @@
 name: vivace
 
-repository: https://github.com/dnunez24/vivace
+repository: https://github.com/upperhandmusic/vivace
 
 packages:
   - packages/**
@@ -8,15 +8,25 @@ packages:
 command:
   version:
     branch: main
-    includeCommitId: true
+    # includeCommitId: true
     linkToCommits: true
     message: "chore: release version {new_package_versions}"
+    # hooks:
+    #   preCommit: dart doc && git add docs
 
 scripts:
   add:
     exec: dart pub add
   analyze:
     exec: dart analyze .
+  ci:
+    exec: dart test --coverage=./coverage
+  cov:ci:
+    exec: dart pub global run coverage:format_coverage --base-directory=$MELOS_PACKAGE_PATH --report-on=lib --lcov -o ./coverage/lcov.info -i ./coverage
+  cov:dev:
+    exec: dart pub global run coverage:format_coverage --base-directory=$MELOS_PACKAGE_PATH --report-on=lib --pretty-print -i ./coverage
+  doc:
+    exec: dart doc --validate-links .
   fix:
     exec: dart fix --apply .
   test:
