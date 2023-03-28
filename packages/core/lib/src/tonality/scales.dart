@@ -131,11 +131,15 @@ class Scale with IterableMixin<PitchClass>, EquatableMixin {
       'scaleDeree must be <= to $scaleDegreeCount',
     );
 
-    if (scaleDegree == 1) return Scale(tonic: tonic, id: id);
+    // Not returning this to create a fluent interface, this is essentially an
+    // identity function when the mode == 1. The first mode is the same as this
+    // Scale so it should just return itself instead of creating another object.
+    // ignore: avoid_returning_this
+    if (scaleDegree == 1) return this;
 
-    final modeScaleDegree = id.enabledBits[scaleDegree - 1];
-    final newIdentity = id.rotateRight(modeScaleDegree);
-    final newTonic = PitchClass.at(modeScaleDegree - 1);
+    final modeSetNumber = id.enabledBits[scaleDegree - 1] - 1;
+    final newIdentity = id.rotateRight(modeSetNumber);
+    final newTonic = PitchClass.at(modeSetNumber);
 
     return Scale(tonic: newTonic, id: newIdentity);
   }
