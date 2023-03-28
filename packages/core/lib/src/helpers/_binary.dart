@@ -17,7 +17,7 @@ extension BinaryHelpers on int {
   /// set from right to left in the binary representation of this [int].
   List<int> get enabledBits {
     final bits = <int>[];
-    var index = 0;
+    var index = 1;
     var next = this;
 
     while (next > 0) {

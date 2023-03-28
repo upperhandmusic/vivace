@@ -46,9 +46,9 @@ void main() {
     group('enabledBits', () {
       test("returns a list of indices for the enabled bits (1's)", () {
         expect(0.enabledBits, <int>[]);
-        expect(1.enabledBits, [0]);
-        expect(int.parse('11010', radix: 2).enabledBits, [1, 3, 4]);
-        expect(int.parse('11111', radix: 2).enabledBits, [0, 1, 2, 3, 4]);
+        expect(1.enabledBits, [1]);
+        expect(int.parse('11010', radix: 2).enabledBits, [2, 4, 5]);
+        expect(int.parse('11111', radix: 2).enabledBits, [1, 2, 3, 4, 5]);
         expect(
           int.parse('101010110101', radix: 2).enabledBits,
           [0, 2, 4, 5, 7, 9, 11],

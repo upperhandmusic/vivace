@@ -36,7 +36,7 @@ class Metronome {
     NoteValue? subdivision,
   }) : subdivision = subdivision ?? meter.value.division;
 
-  Metronome.basic({Meter meter = defaultMeter})
+  Metronome.basic(Tempo tempo, {Meter meter = defaultMeter})
       : subdivision = meter.value.division;
   static const Meter defaultMeter = Meter.commonTime();
 

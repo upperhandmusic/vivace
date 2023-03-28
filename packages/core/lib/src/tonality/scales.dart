@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 import '../../pitch.dart';
@@ -15,7 +16,7 @@ import '../pitch/pitch_class.dart';
 /// * stored as ascending form, descending is derived in getter
 /// * iterable so you can filter, check if it contains a pitch class, etc.
 @immutable
-class Scale with IterableMixin<PitchClass> {
+class Scale with IterableMixin<PitchClass>, EquatableMixin {
   // TODO: implement equality to check scale by ids and tonics (or just by
   // ids)?
 
@@ -134,7 +135,7 @@ class Scale with IterableMixin<PitchClass> {
 
     final modeScaleDegree = id.enabledBits[scaleDegree - 1];
     final newIdentity = id.rotateRight(modeScaleDegree);
-    final newTonic = PitchClass.at(modeScaleDegree);
+    final newTonic = PitchClass.at(modeScaleDegree - 1);
 
     return Scale(tonic: newTonic, id: newIdentity);
   }
@@ -214,8 +215,15 @@ class Scale with IterableMixin<PitchClass> {
     return elementAt(scaleDegree - 1);
   }
 
+  /// Tests if this [Scale] is the same type as [other] based on their unique
+  /// scale identity.
+  bool isSameTypeAs(Scale other) => id == other.id;
+
   @override
   Iterator<PitchClass> get iterator => ScaleIterator(id);
+
+  @override
+  List<Object> get props => [id, tonic];
 }
 
 class ScaleIterator implements Iterator<PitchClass> {

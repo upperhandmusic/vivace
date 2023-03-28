@@ -252,6 +252,24 @@ void main() {
     });
   });
 
+  group('Scale.==', () {
+    test('returns true if the two scales have the same id and tonic', () {
+      const scale1 = Scale.major(PitchClass.C);
+      const scale2 = Scale.major(PitchClass.C);
+
+      expect(scale1 == scale2, isTrue);
+    });
+
+    test('returns false if the two scales have different ids or tonics', () {
+      const scale1 = Scale.major(PitchClass.C);
+      const scale3 = Scale.major(PitchClass.G);
+      const scale2 = Scale.naturalMinor(PitchClass.C);
+
+      expect(scale1 == scale2, isFalse);
+      expect(scale1 == scale3, isFalse);
+    });
+  });
+
   group('Scale.[]', () {
     test('returns the PitchClass at the ith scale degree', () {
       const scale = Scale.major(PitchClass.C);
@@ -262,6 +280,22 @@ void main() {
       expect(scale[5], PitchClass.G);
       expect(scale[6], PitchClass.A);
       expect(scale[7], PitchClass.B);
+    });
+  });
+
+  group('Scale.isSameTypeAs()', () {
+    test('returns true if scales have the same id', () {
+      const scale = Scale.major(PitchClass.C);
+      const other = Scale.major(PitchClass.G);
+
+      expect(scale.isSameTypeAs(other), isTrue);
+    });
+
+    test('returns false if scales have different ids', () {
+      const scale = Scale.major(PitchClass.C);
+      const other = Scale.naturalMinor(PitchClass.C);
+
+      expect(scale.isSameTypeAs(other), isFalse);
     });
   });
 
