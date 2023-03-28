@@ -145,6 +145,56 @@ class Scale with IterableMixin<PitchClass> {
   /// Returns the descending version of this [Scale].
   Set<PitchClass> get descending => Set.unmodifiable(toList().reversed);
 
+  /// Check if [pitchClass] is in this [Scale].
+  ///
+  /// Returns `true` if [pitchClass] is in this [Scale], `false` otherwise.
+  bool isScaleMember(PitchClass pitchClass) =>
+      id.isBitEnabled(pitchClass.setNumber + 1);
+
+  /// Returns an ordered list of all diatonic triads from the scale, in order of
+  /// the ascending scale degrees.
+  ///
+  /// ```dart
+  /// const scale = Scale.major(PitchClass.C);
+  /// assert(scale.triads.length == 7);
+  /// assert(scale.triads, [
+  ///   { PitchClass.C, PitchClass.E, PitchClass.G },
+  ///   { PitchClass.D, PitchClass.F, PitchClass.A },
+  ///   { PitchClass.E, PitchClass.G, PitchClass.B },
+  ///   { PitchClass.F, PitchClass.A, PitchClass.C },
+  ///   { PitchClass.G, PitchClass.B, PitchClass.D },
+  ///   { PitchClass.A, PitchClass.C, PitchClass.E },
+  ///   { PitchClass.B, PitchClass.D, PitchClass.F },
+  /// ]);
+  /// ```
+  List<Set<PitchClass>> get triads {
+    final triads = <Set<PitchClass>>[];
+
+    forEach((pitchClass) {
+      final triad = <PitchClass>{};
+
+      id
+          // get the mode starting on the next set number
+          .rotateRight(pitchClass.setNumber)
+          // convert to a list of chromatic steps that exist in the scale
+          .enabledBits
+          // get every other scale degree for tertiary harmony
+          .whereIndexed((index, _) => index.isEven)
+          // take the first 3 scale degrees, which makes a triad
+          .take(3)
+          // adjust bit by current set number offset to start selecting chord
+          // tones from the root of the mode and  wrap around to the first set
+          // number (0) when it exceeds 11 so we can convert to a PitchClass
+          .map((bit) => ((bit + pitchClass.setNumber) - 1) % 12)
+          // add the PitchClass into our triad Set
+          .forEach((setNum) => triad.add(PitchClass.at(setNum)));
+
+      triads.add(Set.unmodifiable(triad));
+    });
+
+    return List.unmodifiable(triads);
+  }
+
   /// Creates a copy of this [Scale] rotated left by [semitoneCount] semitones.
   Set<PitchClass> rotateLeft(int semitoneCount) => throw UnimplementedError();
 

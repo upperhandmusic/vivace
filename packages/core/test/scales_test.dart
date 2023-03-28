@@ -309,4 +309,23 @@ void main() {
       expect(locrian.tonic, equals(PitchClass.B));
     });
   });
+
+  group('Scale.triads', () {
+    test('gets the set of triads for degree in the scale', () {
+      const scale = Scale.major(PitchClass.C);
+
+      expect(
+        scale.triads,
+        equals([
+          {PitchClass.C, PitchClass.E, PitchClass.G},
+          {PitchClass.D, PitchClass.F, PitchClass.A},
+          {PitchClass.E, PitchClass.G, PitchClass.B},
+          {PitchClass.F, PitchClass.A, PitchClass.C},
+          {PitchClass.G, PitchClass.B, PitchClass.D},
+          {PitchClass.A, PitchClass.C, PitchClass.E},
+          {PitchClass.B, PitchClass.D, PitchClass.F},
+        ]),
+      );
+    });
+  });
 }
