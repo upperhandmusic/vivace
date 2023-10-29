@@ -1,15 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+
 import '../helpers/_equivalence.dart';
 import '../pitch/pitch_class.dart';
 
 /// An auditory attribute of sound according to which sounds can be ordered on
 /// a scale from low to high. Each distinct [Pitch] is the combination of
-/// a [PitchClass] and [Octave].
+/// a [PitchClass] and octave number.
 @immutable
 class Pitch with EquatableMixin, Comparability<Pitch> {
-  /// Creates a [Pitch] with the given [pitchClass] and [octave].
-  const Pitch({required this.pitchClass, required this.octave});
+  /// Creates a [Pitch] from the given [midiNoteNumber].
+  const Pitch(int midiNoteNumber) : noteNumber = midiNoteNumber;
 
   /// Create a [Pitch] from a text name, such as C-1, Ab4 or D#7.
   factory Pitch.named(String text) {
@@ -21,21 +22,35 @@ class Pitch with EquatableMixin, Comparability<Pitch> {
     final noteName = match?.namedGroup('noteName') ?? '';
 
     try {
+      final pitchClass = PitchClass.named(noteName);
       final octaveNumber = int.parse(match?.namedGroup('octave') ?? '');
-      return Pitch(
-        pitchClass: PitchClass.named(noteName),
-        octave: Octave(octaveNumber),
-      );
+      return Pitch.from(pitchClass: pitchClass, octave: octaveNumber);
     } on FormatException {
       throw ArgumentError.value(text, 'octave', 'must be an integer');
     }
   }
 
-  final PitchClass pitchClass;
-  final Octave octave;
+  /// Creates a [Pitch] with the given [pitchClass] and [octave].
+  ///
+  /// The [octave] values conform to the Roland MIDI standard, where C4 (the
+  /// pitch class C in the 4th octave) is equivalent to middle C. This means the
+  /// value of [octave] must be between -1 and 9.
+  factory Pitch.from({required PitchClass pitchClass, required int octave}) {
+    assert(octave >= -1 && octave <= 9, 'Octave must be between -1 and 9');
+    return Pitch((octave + 1) * 12 + pitchClass.setNumber);
+  }
+
+  /// The MIDI note number that represents this [Pitch].
+  final int noteNumber;
+
+  /// The [PitchClass] of this [Pitch].
+  PitchClass get pitchClass => PitchClass.at(noteNumber % 12);
+
+  /// The octave of this [Pitch].
+  int get octave => (noteNumber / 12).floor();
 
   @override
-  List<Object> get props => [octave, pitchClass];
+  List<Object> get props => [noteNumber];
 
   @override
   bool operator <(Pitch other) {
@@ -65,55 +80,22 @@ class Pitch with EquatableMixin, Comparability<Pitch> {
     return pitchClass >= other.pitchClass;
   }
 
-  Pitch operator +(int semitones) {
-    final octaves = (semitones / NoteName.values.length).floor();
-    return Pitch(pitchClass: pitchClass + semitones, octave: octave + octaves);
-  }
+  /// Increment this [Pitch] by the given number of [semitones].
+  Pitch operator +(int semitones) => Pitch(noteNumber + semitones);
 
-  Pitch operator -(int semitones) => throw UnimplementedError();
+  /// Decrement this [Pitch] by the given number of [semitones].
+  Pitch operator -(int semitones) => Pitch(noteNumber - semitones);
+
+  /// Transpose this [Pitch] by the given number of [steps].
+  ///
+  /// Example:
+  ///
+  /// ```dart
+  /// final c4 = Pitch(60);
+  /// c4.transpose(2); // => Pitch(62)
+  /// c4.transpose(-2); // => Pitch(58)
+  /// ```
+  Pitch transpose(int steps) => steps >= 0 ? this + steps : this - steps;
 
   // Frequency toFrequency() => throw UnimplementedError();
-
-  Pitch transpose(int steps) => throw UnimplementedError();
-}
-
-@immutable
-class Octave with EquatableMixin, Comparability<Octave> {
-  const Octave(this.number)
-      : assert(
-          number >= _lowest,
-          'octave number must be greater than or equal to $_lowest',
-        ),
-        assert(
-          number <= _highest,
-          'octave number must be less than or equal to $_highest',
-        );
-  static const int _lowest = -1;
-
-  static const int _highest = 10;
-
-  final int number;
-
-  Octave get lowest => const Octave(_lowest);
-
-  Octave get highest => const Octave(_highest);
-
-  @override
-  bool operator <(Octave other) => number < other.number;
-
-  @override
-  bool operator <=(Octave other) => number <= other.number;
-
-  @override
-  bool operator >(Octave other) => number > other.number;
-
-  @override
-  bool operator >=(Octave other) => number >= other.number;
-
-  Octave operator +(int octaves) => Octave(number + octaves);
-
-  Octave operator -(int octaves) => Octave(number - octaves);
-
-  @override
-  List<Object> get props => [number];
 }
